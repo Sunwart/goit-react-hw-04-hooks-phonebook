@@ -21,7 +21,9 @@ const App = () => {
 
   const checkContact = name => {
     const normilizedName = name.toLowerCase();
-    return contacts.find(contact => normilizedName === contact.name.toLowerCase());
+    return contacts.find(
+      contact => normilizedName === contact.name.toLowerCase()
+    );
   };
 
   const addContact = ({ name, number }) => {
@@ -34,16 +36,16 @@ const App = () => {
   };
 
   const deleteContact = contactId => {
-    setContacts(prevContacts => prevContacts.filter(contact => contact.id !== contactId));
-  };
-
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId)
+    );
   };
 
   const getVisibleNumbers = () => {
     const normilizedFilter = filter.toLowerCase();
-    return contacts.filter(contact => contact.name.toLowerCase().includes(normilizedFilter));
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normilizedFilter)
+    );
   };
 
   useEffect(() => {
@@ -56,8 +58,11 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm submit={addContact} />
       <h2>Contacts</h2>
-      <Filter value={filter} onChange={changeFilter} />
-      <ContactList visibleNumbers={visibleNumbers} onDeleteContact={deleteContact} />
+      <Filter value={filter} onChange={e => setFilter(e.currentTarget.value)} />
+      <ContactList
+        visibleNumbers={visibleNumbers}
+        onDeleteContact={deleteContact}
+      />
     </>
   );
 };
